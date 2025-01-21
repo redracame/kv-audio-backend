@@ -6,6 +6,9 @@ import mongoose from 'mongoose';
 import userRouter from './route/userRouter.js';
 import productRouter from './route/productRouter.js';
 import jwt, { decode } from "jsonwebtoken"
+import dotenv from "dotenv"; 
+
+dotenv.config();
 
 
 // Initialize Express
@@ -28,7 +31,7 @@ app.use((req, res, next) => {
 
 
 // MongoDB connection
-const mongoUrl = 'mongodb+srv://admin:123@cluster0.rsslm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+const mongoUrl = process.env.MONGO_URL;
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected successfully'))
   .catch((err) => console.error('MongoDB connection error:', err));
