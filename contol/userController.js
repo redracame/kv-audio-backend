@@ -3,6 +3,7 @@ import User from "../moduless/user.js"; // Ensure this path is correct
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+dotenv.config();
 
 
 export function registerUser(req, res) {
