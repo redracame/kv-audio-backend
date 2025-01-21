@@ -20,7 +20,7 @@ app.use((req, res, next) => {
   if (token != null) {
     token = token.replace("Bearer ", ""); // Remove "Bearer" prefix and trim whitespace
 
-    jwt.verify(token, "kv secret 89", (err, decoded) => {
+    jwt.verify(token, process.env.JWT__SECRET, (err, decoded) => {
       if (!err) {
           req.user = decoded;// Successfully decoded token
       } 

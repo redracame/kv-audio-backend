@@ -2,7 +2,7 @@ import statuses from "statuses";
 import User from "../moduless/user.js"; // Ensure this path is correct
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-
+import dotenv from "dotenv";
 
 
 export function registerUser(req, res) {
@@ -54,7 +54,7 @@ export function loginUser(req, res) {
                         email: user.email,
                         role: user.role,
                     },
-                    "kv secret 89"
+                   process.env.JWT__SECRET
                 );
                 console.log("JWT generated:", token);
                 res.json({ message: "Login successful", token });
