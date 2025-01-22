@@ -16,7 +16,7 @@ const reviewSchema = new mongoose.Schema({
         required : true
 
     },
-    Comment : {
+    comment : {
         type : String,
         required : true
     },
@@ -28,7 +28,8 @@ const reviewSchema = new mongoose.Schema({
     profilePicture : {
     type : String,
     required : true,
-    default :"https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Ffree-photos-vectors%2Fdefault-user&psig=AOvVaw3ImtXK2TViiJefvr-MgfjY&ust=1737623725555000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCOC0_P7-iIsDFQAAAAAdAAAAABAJ"
+    default :"https://via.placeholder.com/150"
+
     },
      isApproved : {
         type : Boolean,
