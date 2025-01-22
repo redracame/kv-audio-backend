@@ -6,7 +6,8 @@ import mongoose from 'mongoose';
 import userRouter from './route/userRouter.js';
 import productRouter from './route/productRouter.js';
 import jwt, { decode } from "jsonwebtoken"
-import dotenv from "dotenv"; 
+import dotenv from "dotenv";
+import reviewRouter from './route/reviewRouter.js'; 
 
 dotenv.config();
 
@@ -38,6 +39,7 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 
 app.use("/api/Users" , userRouter)
 app.use("/api/products",productRouter)
+app.use("/api/reviews",reviewRouter);
 
 
 // Start the Server
