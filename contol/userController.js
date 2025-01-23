@@ -11,7 +11,7 @@ export function registerUser(req, res) {
     
     // Hash the password
     data.password = bcrypt.hashSync(data.password, 10);
-
+//#
     // Create a new User instance
     const newUser = new User(data); // Use `data`, not `date`
 
