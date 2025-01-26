@@ -2,7 +2,7 @@
 
 import express from 'express';
 import { addReview, approvelReview, deleteReview } from '../contol/reviewController.js';
-import { getReviews } from '../contol/productController.js';
+import { getReviews } from '../contol/reviewController.js';
 
 const reviewRouter = express.Router();
 reviewRouter.post("/", addReview);

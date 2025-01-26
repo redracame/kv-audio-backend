@@ -1,7 +1,7 @@
 import statuses from "statuses";
 const message = statuses.message; // Fix for 'statuses' import
 import product from "../moduless/product.js";
-import Review from "../moduless/review.js";
+
 
 export function addProduct(req, res) {
    console.log(req.user); // Logs the user details if available
@@ -30,21 +30,4 @@ export function addProduct(req, res) {
       .catch((error) => {
          res.status(500).json({ error: "Product addition failed" });
       });
-}
-
-export function getReviews(req,res){
-
-   const user = req.user;
-
-   if(user == null || user.role !="admin"){
-      Review.find({isApproved : true}).then((reviews) =>{
-         res.json(reviews);
-      })
-      return
-   }
-   if(user.role =="admin"){
-      Review.find().then((reviews) =>{
-         res.json(reviews);
-      })
-   }
 }
