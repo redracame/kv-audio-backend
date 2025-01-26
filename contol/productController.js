@@ -1,33 +1,32 @@
-import statuses from "statuses";
-const message = statuses.message; // Fix for 'statuses' import
-import product from "../moduless/product.js";
+import statuses from "statuses"; // Importing statuses library
+import product from "../moduless/product.js"; // Importing the product model
 
+export async function addProduct(req, res) {
+   console.log(req.user); // Logs the user details if available (for debugging)
 
-export function addProduct(req, res) {
-   console.log(req.user); // Logs the user details if available
-   
+   // Check if the user is logged in
    if (req.user == null) {
       res.status(401).json({
-         message: "Please login and try again",
+         message: "Please login and try again", // If not logged in, send error
       });
       return;
    }
-      if(req.user.role != "admin"){
 
-         res.status(403).json({
-          message : "You are not authorized to perform this action"  
-         })         //you not admin print this this the autherization
-         return
-      }
-   
-   const data = req.body;
-   const newProduct = new product(data);
-   newProduct
-      .save()
-      .then(() => {
-         res.json({ message: "Product added successfully" });
-      })
-      .catch((error) => {
-         res.status(500).json({ error: "Product addition failed" });
+   // Check if the user has admin privileges
+   if (req.user.role != "admin") {
+      res.status(403).json({
+         message: "You are not authorized to perform this action", // Unauthorized access
       });
+      return;
+   }
+
+   const data = req.body; // Get the product details from the request body
+   const newProduct = new product(data); // Create a new product instance
+
+   try {
+      await newProduct.save(); // Save the product to the database
+      res.json({ message: "Product added successfully" }); // Respond with success message
+   } catch (error) {
+      res.status(500).json({ error: "Product addition failed" }); // Handle errors
+   }
 }
