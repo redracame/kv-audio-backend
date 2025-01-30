@@ -1,7 +1,11 @@
 import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema({
-
+    key: {
+        type : String,
+        required : true,
+        unique  : true
+    },
     name : {
         type : String,
         required : true
@@ -11,17 +15,31 @@ const productSchema = new mongoose.Schema({
         type :  Number,
         required :true
     },
+    category : {
+        type : String,
+        required : true,
+        default :"uncatgorized"
+    },
+    dimensions :{
+        type : String,
+        required :true
+    },
     description : {
 
         type : String,
         required : true
     },
-isApproved : {
-    type : Boolean,
+    availability : {
+      type : String,
+      required : true,
+      default : true
+    },
+  image:{
+    type : [String],
     required : true,
-    default :false
-}
+    default : ["https://source.unsplash.com/600x400/?audio"]
 
+  }
 })
 
 const product = mongoose.model("Product",productSchema);

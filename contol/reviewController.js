@@ -1,5 +1,4 @@
-import pkg from "statuses"; // Importing statuses library
-const { message } = pkg; // Extracting 'message' for use
+import statuses from 'statuses';// Importing statuses library
 import Review from "../moduless/review.js"; // Importing the Review model
 
 export async function addReview(req, res) {

@@ -1,4 +1,4 @@
-import statuses from "statuses"; // Importing statuses library
+import statuses from 'statuses';// Importing statuses library
 import User from "../moduless/user.js"; // Importing the User model
 import bcrypt from "bcrypt"; // Importing bcrypt for password hashing
 import jwt from "jsonwebtoken"; // Importing JWT for authentication
@@ -61,4 +61,14 @@ export async function loginUser(req, res) {
       console.error("Error during login:", error); // Debugging log
       res.status(500).json({ error: "Internal server error" }); // Error response
    }
+}
+export function isItAdmin(req){
+   let isAdmin = false;
+
+   if(req.user != null){
+      if(req.user.role == "admin"){
+         isAdmin = true;
+      }
+   }
+   return isAdmin;
 }
