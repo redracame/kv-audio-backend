@@ -28,7 +28,7 @@ export async function loginUser(req, res) {
    // Check if email and password are provided
    if (!data.email || !data.password) {
       return res.status(400).json({ error: "Email and password are required" });
-   }
+   }``
 
    try {
       const user = await User.findOne({ email: data.email }); // Find user by email

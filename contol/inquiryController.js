@@ -106,3 +106,56 @@ export async function deleteInquiry(req, res) {
         });
     }
 }
+
+export async function updateInquiry(req, res) {
+    try {
+        if (isItAdmin(req)) {
+            const id = req.params.id;
+            const data = req.body;
+
+            await inquiry.updateOne({ id: id }, data);
+            res.json({
+                message: "Inquiry updated successfully"
+            });
+        } else if (isItCustomer(req)) {
+            const id = req.params.id;
+            const data = req.body;
+
+            const inquiryDoc = await inquiry.findOne({ id: id });
+
+            if (!inquiryDoc) {
+                res.status(404).json({
+                    message: "Inquiry not found"
+                });
+                return;
+            }
+
+            if (inquiryDoc.email === req.user.email) {
+                // Ensure 'message' field is part of the request body
+                if (!data.message) {
+                    return res.status(400).json({
+                        message: "Message is required"
+                    });
+                }
+
+                await inquiry.updateOne({ id: id }, { message: data.message });
+                res.json({
+                    message: "Inquiry updated successfully"
+                });
+            } else {
+                res.status(403).json({
+                    message: "You are not authorized to perform this action"
+                });
+            }
+        } else {
+            res.status(403).json({
+                message: "You are not authorized to perform this action"
+            });
+        }
+    } catch (e) {
+        res.status(500).json({
+            message: "Failed to update inquiry",
+            error: e.message // Debugging the error message
+        });
+    }
+}
