@@ -123,7 +123,7 @@ export async function updateInquiry(req, res) {
 
             const inquiryDoc = await inquiry.findOne({ id: id });
 
-            if (!inquiryDoc) {
+            if (!inquiryDoc) { 
                 res.status(404).json({
                     message: "Inquiry not found"
                 });
