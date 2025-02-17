@@ -53,7 +53,7 @@ export async function loginUser(req, res) {
             process.env.JWT__SECRET
          );
 
-         res.json({ message: "Login successful", token }); // Success response with token
+         res.json({ message: "Login successful", token: token , user: user}); // Success response with token
       } else {
          res.status(401).json({ error: "Login failed" }); // Incorrect password
       }
